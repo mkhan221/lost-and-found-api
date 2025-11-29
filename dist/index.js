@@ -15,6 +15,8 @@ const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 const cors_1 = __importDefault(require("cors"));
 const path_1 = __importDefault(require("path"));
 dotenv_1.default.config();
+console.log("DEBUG DATABASE_URL =", JSON.stringify(process.env.DATABASE_URL));
+console.log("DEBUG RENDER =", JSON.stringify(process.env.RENDER));
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3000;
 app.use((0, cors_1.default)());

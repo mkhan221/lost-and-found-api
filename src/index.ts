@@ -13,6 +13,10 @@ import path from "path";
 
 dotenv.config();
 
+console.log("DEBUG DATABASE_URL =", JSON.stringify(process.env.DATABASE_URL));
+console.log("DEBUG RENDER =", JSON.stringify(process.env.RENDER));
+
+
 const app = express();
 const port = process.env.PORT || 3000;
 

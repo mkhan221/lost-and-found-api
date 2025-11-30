@@ -27,17 +27,17 @@ class UserItemsDA {
         return result.rows[0] || null;
     }
     static async update(userItem) {
-        if (!userItem.useritemid) {
+        if (!userItem.useritemid)
             throw new Error("useritemid is required to update a user item.");
-        }
         const query = `
-            SELECT * FROM fnUpdateUserItems($1, $2, $3, $4)
-        `;
+        SELECT fnUpdateUserItems($1, $2, $3, $4, $5)
+    `;
         const values = [
             userItem.useritemid,
             userItem.locationid ?? null,
             userItem.itemid,
             userItem.isfound ?? false,
+            userItem.claimedbyuserid ?? null
         ];
         await db_1.pool.query(query, values);
     }

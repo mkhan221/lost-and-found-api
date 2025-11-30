@@ -231,19 +231,22 @@ router.post("/", async (req, res, next) =>
  *       400:
  *         description: useritemid is required
  */
-router.put("/:id", async (req, res, next) =>
-{
-    try
-    {
+router.put("/:id", async (req, res, next) => {
+    try {
         const useritemid = parseInt(req.params.id);
-        const userItem: UserItem = { ...req.body, useritemid };
+        const userItem: UserItem = { 
+            ...req.body, 
+            useritemid,
+            claimedbyuserid: req.body.claimedbyuserid ?? null
+        };
+
         await UserItemsDA.update(userItem);
         res.status(204).send();
-    } catch (err)
-    {
+    } catch (err) {
         next(err);
     }
 });
+
 
 /**
  * @swagger

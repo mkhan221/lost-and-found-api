@@ -221,7 +221,11 @@ router.post("/", async (req, res, next) => {
 router.put("/:id", async (req, res, next) => {
     try {
         const useritemid = parseInt(req.params.id);
-        const userItem = { ...req.body, useritemid };
+        const userItem = {
+            ...req.body,
+            useritemid,
+            claimedbyuserid: req.body.claimedbyuserid ?? null
+        };
         await UserItemsDA_1.UserItemsDA.update(userItem);
         res.status(204).send();
     }

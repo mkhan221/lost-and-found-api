@@ -34,24 +34,25 @@ export class UserItemsDA
     }
 
     static async update(userItem: UserItem): Promise<void>
-    {
-        if (!userItem.useritemid)
-        {
-            throw new Error("useritemid is required to update a user item.");
-        }
+{
+    if (!userItem.useritemid)
+        throw new Error("useritemid is required to update a user item.");
 
-        const query = `
-            SELECT * FROM fnUpdateUserItems($1, $2, $3, $4)
-        `;
-        const values = [
-            userItem.useritemid,
-            userItem.locationid ?? null,
-            userItem.itemid,
-            userItem.isfound ?? false,
-        ];
+    const query = `
+        SELECT fnUpdateUserItems($1, $2, $3, $4, $5)
+    `;
 
-        await pool.query(query, values);
-    }
+    const values = [
+        userItem.useritemid,
+        userItem.locationid ?? null,
+        userItem.itemid,
+        userItem.isfound ?? false,
+        userItem.claimedbyuserid ?? null
+    ];
+
+    await pool.query(query, values);
+}
+
 
     static async delete(useritemid: number): Promise<void>
     {

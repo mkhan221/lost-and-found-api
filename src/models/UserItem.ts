@@ -6,4 +6,5 @@ export interface UserItem
     itemid: number;
     isfound?: boolean;
     dateposted?: Date;
+    claimedbyuserid?: number | null; 
 }
